@@ -24,7 +24,7 @@ const SearchManufacturer: FC<SearchManufacturerProps> = ({
         });
   return (
     <div className="search-manufacturer">
-      <Combobox>
+      <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image
@@ -54,7 +54,7 @@ const SearchManufacturer: FC<SearchManufacturerProps> = ({
                   value={query}
                   className="search-manufacturer__option"
                 >
-                  Create "{query}"
+                  Create `&quot;`{query}`&quot;`
                 </Combobox.Option>
               ) : (
                 filteredManufacturers.map((m, i) => (
@@ -66,7 +66,17 @@ const SearchManufacturer: FC<SearchManufacturerProps> = ({
                   ${active ? "bg-primary-blue text-white" : "text-gray-900"}
                   `}
                   >
-                    {m}
+                    {({ active, selected }) => (
+                      <li
+                        className={`${
+                          active
+                            ? "bg-blue-500 text-white"
+                            : "bg-white text-black"
+                        }`}
+                      >
+                        {m}
+                      </li>
+                    )}
                   </Combobox.Option>
                 ))
               )}
