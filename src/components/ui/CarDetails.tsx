@@ -3,6 +3,7 @@ import { CarProps } from "@/types";
 import { FC, Fragment } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
+import { generateCarImageURL } from "@/utils";
 
 interface CarDetailsProps {
   isOpen: boolean;
@@ -54,7 +55,7 @@ const CarDetails: FC<CarDetailsProps> = ({ isOpen, car, closeModal }) => {
                   <div className="flex-1 flex flex-col gap-3">
                     <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
                       <Image
-                        src="/hero.png"
+                        src={generateCarImageURL(car, "29")}
                         alt="Car Model"
                         fill
                         priority
@@ -64,7 +65,7 @@ const CarDetails: FC<CarDetailsProps> = ({ isOpen, car, closeModal }) => {
                     <div className="flex gap-3">
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={generateCarImageURL(car, "33")}
                           alt="Car Model"
                           fill
                           priority
@@ -73,7 +74,7 @@ const CarDetails: FC<CarDetailsProps> = ({ isOpen, car, closeModal }) => {
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={generateCarImageURL(car, "13")}
                           alt="Car Model"
                           fill
                           priority
@@ -82,7 +83,7 @@ const CarDetails: FC<CarDetailsProps> = ({ isOpen, car, closeModal }) => {
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={generateCarImageURL(car)}
                           alt="Car Model"
                           fill
                           priority
@@ -101,8 +102,12 @@ const CarDetails: FC<CarDetailsProps> = ({ isOpen, car, closeModal }) => {
                           key={i}
                           className="flex justify-between gap-5 w-full text-right"
                         >
-                          <h4 className="text-grey capitalize">{key.split("_").join(" ")}</h4>
-                          <p className="text-black-100 font-semibold capitalize">{value}</p>
+                          <h4 className="text-grey capitalize">
+                            {key.split("_").join(" ")}
+                          </h4>
+                          <p className="text-black-100 font-semibold capitalize">
+                            {value}
+                          </p>
                         </div>
                       ))}
                     </div>
