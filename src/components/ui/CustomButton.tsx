@@ -5,18 +5,21 @@ interface CustomButtonProps {
   title: string;
   containerStyles?: string;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
+  btnType?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 const CustomButton: FC<CustomButtonProps> = ({
   title,
   containerStyles,
   handleClick,
+  btnType = "button",
+  disabled = false,
 }) => {
-  console.log(containerStyles);
   return (
     <button
-      disabled={false}
-      type={"button"}
+      disabled={disabled}
+      type={btnType}
       className={`custom-btn ${containerStyles}`}
       onClick={handleClick}
     >
