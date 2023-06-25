@@ -1,4 +1,7 @@
+"use client";
 import { FC } from "react";
+
+import { useSearchParams } from "next/navigation";
 import CustomFilter from "./CustomFilter";
 import SearchBar from "./SearchBar";
 import { fetchCars } from "@/utils";
@@ -6,8 +9,16 @@ import CarCard from "./CarCard";
 
 interface ExploreProps {}
 
-const Explore: FC<ExploreProps> = async ({}) => {
-  const allCars = await fetchCars();
+export const dynamic = "force-dynamic";
+const Explore: FC<ExploreProps> = async () => {
+  const searchParams = useSearchParams();
+  const allCars = await fetchCars({
+    manufacturer: searchParams.get("manufacturer") || "",
+    model: searchParams.get("model") || "",
+    year: +(searchParams.get("year") || 2022),
+    limit: +(searchParams.get("limit") || 10),
+    fuel: searchParams.get("fuel") || "",
+  });
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
   return (
